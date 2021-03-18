@@ -1,4 +1,4 @@
-name: Linux Releases
+name: Mac Releases
 
 on:
   push:
@@ -8,13 +8,13 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BUILD_TYPE: Release
+  FC: /usr/local/bin/gfortran-9
+  MACOSX_DEPLOYMENT_TARGET: 10.15
+  SDKROOT: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
 
 jobs:
-  linux_release:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-18.04, ubuntu-20.04]
+  mac_release:
+    runs-on: macos-10.15
 
     steps:
     - uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8.5
-        
+
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
