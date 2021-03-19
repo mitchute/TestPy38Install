@@ -1,9 +1,6 @@
 name: Linux Releases
 
-on:
-  push:
-    tags:
-      - '*'
+on: [push, pull_request]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,7 +20,7 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.8.5
-        
+
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
